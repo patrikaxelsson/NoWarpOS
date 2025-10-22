@@ -1,0 +1,21 @@
+# NoWarpOS
+Temporarily disables usage of WarpUP/WarpOS by patching OpenLibrary() to
+deny powerpc.library opens.
+
+Created to be able to test both the 68k and PPC part of software, which
+automatically utilizes the PPC when WarpOS is available.
+
+
+## Example
+```
+> run NoWarpOS
+OpenLibrary() patched to deny powerpc.library opens, break to restore!
+[CLI 1]
+> UHC:C/time asum Work:test100M.bin
+2f282b84e7e608d5852449ed940bfc51  Work:test100M.bin
+21.467683s
+> break 1
+> UHC:C/time asum Work:test100M.bin
+2f282b84e7e608d5852449ed940bfc51  Work:test100M.bin
+9.052321s
+```
